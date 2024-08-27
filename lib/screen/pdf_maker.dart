@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:html';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 class PdfMaker {
   Future<void> printCustomersPdf() async {
@@ -22,8 +23,18 @@ class PdfMaker {
     // Define a starting point for the Y axis.
     double yOffset = 0;
 
+
+    // Load a network image.
+    final String imageUrl = 'https://avatars.githubusercontent.com/u/106102340?v=4';
+    final http.Response response = await http.get(Uri.parse(imageUrl));
+    final PdfBitmap image = PdfBitmap(response.bodyBytes);
+
+    // Draw the image on the page.
+    yOffset += 0;
+    page.graphics.drawImage(image, Rect.fromLTWH(0, yOffset, 100, 100));
+
     // Draw the header for the CV.
-    yOffset += 20;
+    yOffset += 100;
     page.graphics.drawString('John Doe', headerFont, bounds: Rect.fromLTWH(0, yOffset, 500, 40));
 
     // Draw contact information.
