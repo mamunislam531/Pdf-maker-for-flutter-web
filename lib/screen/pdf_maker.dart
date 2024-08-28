@@ -57,9 +57,51 @@ class PdfController extends GetxController {
       // Draw Contact Info
       yOffset += 90;
       page.graphics.drawString(
-          '📞 +123 456 7890\n✉️ hello@realemail.com\n📍 123 Anywhere St., Any City',
+          '📞 +8801737374083\n✉️ mabdullahalsiddik@email.com\n📍 Uttora., Dhaka',
           font,
           bounds: Rect.fromLTWH(30, yOffset, 200, 60));
+
+      // Draw Skills section
+      yOffset += 90;
+
+      page.graphics.drawString('SKILLS', subHeaderFont,
+          bounds: Rect.fromLTWH(30, yOffset, 200, 30));
+      yOffset += 40;
+      page.graphics.drawString(
+          '• Html & Css\n• Dart & Flutter\n• Firebase\n• REST APIs\n• Git & Version Control\n• Agile Methodologies\n• UX/UI Design\n• Python',
+          font,
+          bounds: Rect.fromLTWH(30, yOffset, 500, 100));
+
+      // Draw Skills Summary
+      yOffset += 90;
+
+      page.graphics.drawString('SKILLS SUMMARY', subHeaderFont,
+          bounds: Rect.fromLTWH(90, yOffset, 200, 20));
+      yOffset += 30;
+
+      drawSkillBar(
+        page,
+        'Flutter Development',
+        0.80,
+        250,
+        yOffset,
+      );
+      yOffset += 30;
+      drawSkillBar(
+        page,
+        'Android Development',
+        1,
+        250,
+        yOffset,
+      );
+      yOffset += 30;
+      drawSkillBar(
+        page,
+        'Ios Development',
+        1,
+        250,
+        yOffset,
+      );
 
       // Draw Experience section
       double xOffset = 250;
@@ -68,24 +110,24 @@ class PdfController extends GetxController {
           bounds: Rect.fromLTWH(xOffset, yOffset, 500, 30));
       yOffset += 30;
       page.graphics.drawString(
-          'Studio Shovde\nCanberra - Australia\n2020 - 2022\nLorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          'Maan Academy\nFlutter Development Intern\n01-01- 2023 - 7-01-2024',
           font,
           bounds: Rect.fromLTWH(xOffset, yOffset, 300, 60));
 
-      yOffset += 70;
+      yOffset += 50;
       page.graphics.drawString(
-          'Elevenon Co.\nKota Baru - Singapore\n2016 - 2020\nLorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          'eAppair Software Limited\nFlutter Software Engineer\n01-01- 2023 - 7-01-2024',
           font,
           bounds: Rect.fromLTWH(xOffset, yOffset, 300, 60));
 
-      yOffset += 70;
+      yOffset += 50;
       page.graphics.drawString(
-          'Studio Shovde\nSydney - Australia\n2010 - 2015\nLorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          'Classic IT & Sky Mart Limited\nFlutter Software Developer\n07-01-2024 - Present',
           font,
           bounds: Rect.fromLTWH(xOffset, yOffset, 300, 60));
 
       // Draw Education section
-      yOffset += 90;
+      yOffset += 60;
       page.graphics.drawString('EDUCATION', subHeaderFont,
           bounds: Rect.fromLTWH(xOffset, yOffset, 500, 30));
       yOffset += 30;
@@ -94,22 +136,33 @@ class PdfController extends GetxController {
           font,
           bounds: Rect.fromLTWH(xOffset, yOffset, 300, 50));
 
-      yOffset += 70;
+      yOffset += 50;
       page.graphics.drawString(
           'Borelle University\nMaster of Business Management\n2018 - 2020',
           font,
           bounds: Rect.fromLTWH(xOffset, yOffset, 300, 50));
 
-      // Draw Skills Summary
-      yOffset = 150;
-      xOffset = 550;
-      page.graphics.drawString('SKILLS SUMMARY', subHeaderFont,
-          bounds: Rect.fromLTWH(xOffset, yOffset, 200, 30));
-      yOffset += 40;
+      // Draw Projects section
 
-      drawSkillBar(page, 'Design Process', 0.78, xOffset, yOffset, font);
-      yOffset += 40;
-      drawSkillBar(page, 'Project Management', 0.81, xOffset, yOffset, font);
+      yOffset += 60;
+      page.graphics.drawString('PROJECTS', subHeaderFont,
+          bounds: Rect.fromLTWH(xOffset, yOffset, 500, 30));
+      yOffset += 30;
+      page.graphics.drawString(
+          'eCommerce UI Kit Design Template\n• https://classicportfolio.web.app\n• 1-6-2024 - 15-6-2024',
+          font,
+          bounds: Rect.fromLTWH(xOffset, yOffset, 200, 60));
+
+      yOffset += 50;
+      page.graphics.drawString(
+          'Classic Coffee Shop\n• https://classicportfolio.web.app\n• 1-6-2024 - 15-6-2024',
+          font,
+          bounds: Rect.fromLTWH(xOffset, yOffset, 200, 60));
+      yOffset += 50;
+      page.graphics.drawString(
+          'An Enterprise Resource Planning (ERP) system\n• https://classicportfolio.web.app\n• 1-6-2024 - 15-6-2024',
+          font,
+          bounds: Rect.fromLTWH(xOffset, yOffset, 200, 60));
 
       // Save the document
       List<int> bytes = await document.save();
@@ -130,25 +183,30 @@ class PdfController extends GetxController {
     }
   }
 
-  void drawSkillBar(PdfPage page, String skill, double percentage,
-      double xOffset, double yOffset, PdfFont font) {
+  void drawSkillBar(
+    PdfPage page,
+    String skill,
+    double percentage,
+    double xOffset,
+    double yOffset,
+  ) {
     const double barWidth = 100;
-    page.graphics.drawString(skill, font,
-        bounds: Rect.fromLTWH(xOffset, yOffset, 200, 20));
+    page.graphics
+        .drawString(skill, font, bounds: Rect.fromLTWH(30, yOffset, 200, 20));
 
     double filledWidth = percentage * barWidth;
     page.graphics.drawRectangle(
       pen: PdfPens.darkBlue,
       brush: PdfBrushes.darkBlue,
-      bounds: Rect.fromLTWH(xOffset, yOffset + 20, filledWidth, 10),
+      bounds: Rect.fromLTWH(30, yOffset + 20, filledWidth, 10),
     );
     page.graphics.drawRectangle(
       pen: PdfPens.gray,
       bounds: Rect.fromLTWH(
-          xOffset + filledWidth, yOffset + 20, barWidth - filledWidth, 10),
+          30 + filledWidth, yOffset + 20, barWidth - filledWidth, 10),
     );
 
     page.graphics.drawString('${(percentage * 100).round()} %', font,
-        bounds: Rect.fromLTWH(xOffset + barWidth + 10, yOffset + 15, 50, 20));
+        bounds: Rect.fromLTWH(30 + barWidth + 10, yOffset + 15, 50, 20));
   }
 }
