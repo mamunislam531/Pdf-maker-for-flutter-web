@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pdf_maker_flutter_web/screen/pdf_maker.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
+class PdfView extends StatelessWidget {
+  const PdfView({super.key});
 
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final PdfController pdfController = Get.put(PdfController());
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Generate CV PDF'),
+      ),
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              PdfMaker().printCustomersPdf();
-            },
-            child: Text("Make Pdf")),
+        child: Obx(() {
+          if (pdfController.isLoading.value) {
+            return const CircularProgressIndicator();
+          } else {
+            return ElevatedButton(
+              onPressed: () {
+                pdfController.generateAndDownloadPdf();
+              },
+              child: const Text('Generate and Download PDF'),
+            );
+          }
+        }),
       ),
     );
   }
